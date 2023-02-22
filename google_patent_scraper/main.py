@@ -177,6 +177,12 @@ class scraper_class:
             
 
         """
+        # Patent number #
+        try:
+            patent_number = soup.find('span', itemprop="publicationNumber").get_text()
+        except:
+            patent_number = ''
+        # Inventor #
         try:
             inventor_name = [{'inventor_name':x.get_text()} for x in soup.find_all('dd',itemprop='inventor')]
         except:
@@ -193,17 +199,17 @@ class scraper_class:
           
         # Publication Date #
         try:
-            pub_date = soup.find('dd',itemprop='publicationDate').get_text()
+            pub_date = soup.find('span', itemprop='publicationDate').get_text()
         except:
             pub_date = ''
         # Application Number #
-        try: 
-            application_number = soup.find('dd',itemprop="applicationNumber").get_text()
+        try:
+            application_number = soup.find('span', itemprop="applicationNumber").get_text()
         except:
             application_number = ''
         # Filing Date # 
         try:
-            filing_date = soup.find('dd',itemprop='filingDate').get_text()
+            filing_date = soup.find('span', itemprop='filingDate').get_text()
         except:
             filing_date = ''
         # Loop through all events #
@@ -273,18 +279,14 @@ class scraper_class:
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-        return({'inventor_name':json.dumps(inventor_name),
-                'assignee_name_orig':json.dumps(assignee_name_orig),
-                'assignee_name_current':json.dumps(assignee_name_current),
-                'pub_date':pub_date,
-                'priority_date':priority_date,
-                'grant_date':grant_date,
-                'filing_date':filing_date,
-                'forward_cite_no_family':json.dumps(forward_cites_no_family),
-                'forward_cite_yes_family':json.dumps(forward_cites_yes_family),
-                'backward_cite_no_family':json.dumps(backward_cites_no_family),
-                'backward_cite_yes_family':json.dumps(backward_cites_yes_family),
-                'abstract_text':abstract_text})
+        return ({'inventor_name': json.dumps(inventor_name),
+                 'patent_number': patent_number,
+                 'application_number': application_number,
+                 'pub_date': pub_date,
+                 'priority_date': priority_date,
+                 'grant_date': grant_date,
+                 'filing_date': filing_date,
+                 'abstract_text': abstract_text})
 
     def get_scraped_data(self,soup,patent,url):
         # ~~ Parse individual patent ~~ #
