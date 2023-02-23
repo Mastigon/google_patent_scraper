@@ -180,7 +180,7 @@ class scraper_class:
         """
         # Patent number #
         try:
-            patent_number = soup.find('span', itemprop="publicationNumber").get_text()
+            patent_number = soup.find('dd', itemprop="publicationNumber").get_text()
         except:
             patent_number = ''
         # Inventor #
