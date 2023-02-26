@@ -282,14 +282,12 @@ class scraper_class:
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-        return ({'inventor_name': json.dumps(inventor_name),
-                 'patent_number': patent_number,
+        return ({'patent_number': patent_number,
                  'application_number': application_number,
                  'pub_date': pub_date,
-                 'priority_date': priority_date,
                  'grant_date': grant_date,
-                 'filing_date': filing_date,
-                 'abstract_text': abstract_text})
+                 'filing_date': filing_date
+                 })
 
     def get_scraped_data(self, soup, patent, url):
         # ~~ Parse individual patent ~~ #
