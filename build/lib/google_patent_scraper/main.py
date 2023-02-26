@@ -114,7 +114,6 @@ class scraper_class:
                 url = 'https://patents.google.com/patent/{0}'.format(patent)
             else:
                 url = patent
-            print(url)
             req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             webpage = urlopen(req).read()
             soup = BeautifulSoup(webpage, features="lxml")
